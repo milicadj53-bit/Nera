@@ -192,9 +192,9 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,64px)">
       <sc-for list="{{ journal }}" as="j" hint-placeholder-count="2">
-        <a href="journal.dc.html" data-reveal="" style="text-decoration:none;color:#171714;display:block">
-          <div style="aspect-ratio:16/10;overflow:hidden;background:#E7DFD2">
-            <dc-import name="Img" src="{{ j.src }}" alt="{{ j.title }}" hint-size="100%,100%"></dc-import>
+        <a href="{{ j.href }}" data-reveal="" style="text-decoration:none;color:#171714;display:block">
+          <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#E7DFD2">
+            <dc-import name="Img" src="{{ j.src }}" alt="{{ j.title }}" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import>
           </div>
           <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a;display:block;margin:24px 0 12px">{{ j.tag }}</span>
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,2.6vw,38px);line-height:1.15;margin:0;max-width:22ch">{{ j.title }}</h3>
@@ -260,8 +260,8 @@ class Component extends DCLogic {
       {title:'BEZ DODATIH MIRISA',desc:'Fokus na ono što je koži potrebno.'},
     ];
     const journal=[
-      {tag:'BARIJERA',title:'Zašto je kožna barijera važnija nego što misliš',src:'assets/texture.jpg'},
-      {tag:'RUTINA',title:'Da li je tvojoj koži zaista potrebno deset proizvoda?',src:'assets/lineup.jpg'},
+      {tag:'BARIJERA',title:'Zašto je kožna barijera važnija nego što misliš',src:'assets/hero-model.jpg',href:'clanak.dc.html?a=kozna-barijera'},
+      {tag:'RUTINA',title:'Da li je tvojoj koži zaista potrebno deset proizvoda?',src:'assets/lineup-v.jpg',href:'clanak.dc.html?a=deset-proizvoda'},
     ];
     return {products,actives,steps,principles,journal,onEnter:this.onEnter,onLeave:this.onLeave,activeStepSrc:stepData[cur].src};
   }
