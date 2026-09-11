@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>O nama - NÉRA | Nega koja zna kada je dosta</title>
+<meta name="description" content="Priča o NÉRA - brendu nastalom iz ideje da koži ne treba još jedan proizvod, već pažljivo odabrane formule i jednostavniji ritual.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:56px!important;padding-bottom:56px!important}.about-hero-img{height:38vh!important;min-height:260px!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden">
+  <dc-import name="Nav" active="o-nama" hint-size="100%,88px"></dc-import>
+
+  <section style="padding:clamp(120px,16vh,180px) clamp(20px,5vw,64px) clamp(48px,6vw,80px);max-width:1600px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center">
+    <span data-reveal style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.28em;color:#8b857a;display:block;margin-bottom:34px">NÉRA / O NAMA</span>
+    <h1 data-reveal style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,9vw,142px);line-height:0.95;letter-spacing:-0.01em;margin:0;max-width:20ch">NEGA KOJA ZNA<br>KADA JE DOSTA.</h1>
+  </section>
+
+  <section class="about-hero-img" style="position:relative;height:90vh;min-height:520px;overflow:hidden">
+    <div data-parallax style="position:absolute;inset:0"><dc-import name="Img" src="assets/portrait.jpg" alt="NÉRA brend priča" loading="eager" hint-size="100%,100%"></dc-import></div>
+  </section>
+
+  <section style="max-width:1000px;margin:0 auto;padding:clamp(90px,14vw,200px) clamp(20px,5vw,64px)">
+    <p data-reveal style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,4vw,58px);line-height:1.2;margin:0;letter-spacing:-0.01em">Beauty industrija stalno govori ljudima da im treba još jedan proizvod. NÉRA nastaje iz suprotne ideje.</p>
+    <p data-reveal style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(16px,1.5vw,20px);color:#3f3b33;line-height:1.8;margin:clamp(40px,5vw,64px) 0 0;max-width:60ch">Verujemo da koža ne traži više - traži bolje. Umesto dugih rutina i polica prepunih proizvoda, NÉRA se oslanja na pažljivo odabrane formule, jasnu svrhu i jednostavniji ritam nege. Svaki proizvod postoji sa razlogom, i nijedan ne postoji da bi popunio prazninu.</p>
+  </section>
+
+  <section style="max-width:1600px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(60px,8vw,110px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,3vw,48px)">
+      <div data-reveal style="position:relative;aspect-ratio:4/5;background:#E7DFD2;overflow:hidden"><dc-import name="Img" src="assets/model-v.jpg" alt="NÉRA nega kože" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div>
+      <div data-reveal style="position:relative;aspect-ratio:4/5;background:#E7DFD2;overflow:hidden;margin-top:clamp(0px,8vw,120px)"><dc-import name="Img" src="assets/lineup-v.jpg" alt="NÉRA proizvodi" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div>
+    </div>
+  </section>
+
+  <section style="background:#171714;color:#F4F0E8;padding:clamp(100px,16vw,220px) clamp(20px,5vw,64px)">
+    <p data-reveal style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(30px,5.5vw,84px);line-height:1.12;margin:0 auto;max-width:18ch;text-align:center">„Koži ne treba više. Treba joj bolje.“</p>
+  </section>
+
+  <section style="max-width:1600px;margin:0 auto;padding:clamp(90px,14vw,200px) clamp(20px,5vw,64px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(32px,4vw,72px)">
+      <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+        <div data-reveal style="border-top:1px solid rgba(23,23,20,0.18);padding-top:26px">
+          <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a">{{ v.num }}</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,3vw,40px);margin:14px 0 12px;line-height:1.1">{{ v.title }}</h3>
+          <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:15px;color:#3f3b33;line-height:1.6;margin:0">{{ v.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+    this._px=()=>{const y=window.innerHeight;document.querySelectorAll('[data-parallax-off]').forEach(p=>{const r=p.getBoundingClientRect();p.style.transform='translateY('+((r.top+r.height/2-y/2)*-0.06)+'px) scale(1.08)';});};
+    window.addEventListener('scroll',this._px,{passive:true});this._px();
+  }
+  componentWillUnmount(){if(this._px)window.removeEventListener('scroll',this._px);}
+  renderVals(){
+    return {values:[
+      {num:'01',title:'Manje, ali bolje',desc:'Radije nekoliko formula koje rade nego polica koja stoji.'},
+      {num:'02',title:'Jasna svrha',desc:'Svaki proizvod i sastojak imaju razlog zašto postoje.'},
+      {num:'03',title:'Bez buke',desc:'Bez praznih obećanja, trendova i nepotrebne kompleksnosti.'},
+    ]};
+  }
+}
+</script>
+</body>
+</html>

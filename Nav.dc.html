@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+</helmet>
+<header style="{{ headerStyle }}">
+  <div style="max-width:1600px;margin:0 auto;height:100%;padding:0 clamp(20px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="index.dc.html" style="{{ logoStyle }}">NÉRA</a>
+
+    <nav style="{{ deskNavStyle }}" aria-label="Glavna navigacija">
+      <sc-for list="{{ links }}" as="link" hint-placeholder-count="6">
+        <a href="{{ link.href }}" style="{{ link.style }}">{{ link.label }}</a>
+      </sc-for>
+    </nav>
+
+    <button onClick="{{ toggleMenu }}" aria-label="Meni" style="{{ burgerStyle }}">
+      <span style="{{ burgerLine }}"></span>
+      <span style="{{ burgerLine }}"></span>
+    </button>
+  </div>
+</header>
+
+<div style="{{ overlayStyle }}" aria-hidden="{{ overlayHidden }}">
+  <div style="position:absolute;top:0;left:0;right:0;height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+    <span style="font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.14em;color:#F4F0E8;font-size:26px">NÉRA</span>
+    <button onClick="{{ toggleMenu }}" aria-label="Zatvori meni" style="background:none;border:none;color:#F4F0E8;font-family:'Manrope',sans-serif;font-size:13px;letter-spacing:0.2em;cursor:pointer;padding:8px">ZATVORI</button>
+  </div>
+  <nav style="display:flex;flex-direction:column;gap:clamp(6px,2vh,14px)" aria-label="Mobilna navigacija">
+    <sc-for list="{{ links }}" as="link" hint-placeholder-count="6">
+      <a href="{{ link.href }}" onClick="{{ closeMenu }}" style="{{ link.mStyle }}">{{ link.label }}</a>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:88},&quot;active&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;light&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { scrolled:false, menuOpen:false, vw: (typeof window!=='undefined'?window.innerWidth:1440) };
+  componentDidMount(){
+    this._s=()=>this.setState({scrolled:window.scrollY>40});
+    this._r=()=>this.setState({vw:window.innerWidth});
+    window.addEventListener('scroll',this._s,{passive:true});
+    window.addEventListener('resize',this._r);
+    this._s();
+  }
+  componentWillUnmount(){ window.removeEventListener('scroll',this._s); window.removeEventListener('resize',this._r); }
+  toggleMenu=()=>{ this.setState(s=>{ const o=!s.menuOpen; document.body.style.overflow=o?'hidden':''; return {menuOpen:o}; }); }
+  closeMenu=()=>{ document.body.style.overflow=''; this.setState({menuOpen:false}); }
+  renderVals(){
+    const scrolled=this.state.scrolled;
+    const mobile=this.state.vw<900;
+    const active=this.props.active||'';
+    const topLight=(this.props.light==='true'||this.props.light===true)&&!scrolled;
+    const navColor=topLight?'#F4F0E8':'#171714';
+    const items=[
+      {label:'PROIZVODI',slug:'proizvodi',href:'proizvodi.dc.html'},
+      {label:'SASTOJCI',slug:'sastojci',href:'sastojci.dc.html'},
+      {label:'RITUAL NEGE',slug:'ritual',href:'ritual.dc.html'},
+      {label:'O NAMA',slug:'o-nama',href:'o-nama.dc.html'},
+      {label:'JOURNAL',slug:'journal',href:'journal.dc.html'},
+      {label:'KONTAKT',slug:'kontakt',href:'kontakt.dc.html'},
+    ];
+    const links=items.map(it=>{
+      const on=it.slug===active;
+      return {...it,
+        style:`font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.18em;text-decoration:none;color:${navColor};opacity:${on?1:0.66};padding:6px 0;position:relative;border-bottom:1px solid ${on?(topLight?'rgba(244,240,232,0.6)':'rgba(23,23,20,0.55)'):'transparent'};transition:opacity .3s ease,border-color .3s ease,color .4s ease;white-space:nowrap`,
+        mStyle:`font-family:'Cormorant Garamond',serif;font-size:clamp(30px,7vw,46px);font-weight:400;letter-spacing:0.02em;text-decoration:none;color:#F4F0E8;opacity:${on?1:0.72};line-height:1.15`
+      };
+    });
+    return {
+      links,
+      logoStyle:`font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.14em;color:${navColor};text-decoration:none;line-height:1;transition:color .4s ease,font-size .4s ease;font-size:${scrolled?'clamp(22px,3vw,28px)':'clamp(26px,4vw,38px)'}`,
+      burgerLine:`display:block;width:24px;height:1px;background:${navColor};transition:background .4s ease`,
+      headerStyle:`position:fixed;top:0;left:0;right:0;z-index:100;height:${scrolled?'64px':'88px'};background:${scrolled?'rgba(244,240,232,0.96)':'transparent'};border-bottom:1px solid ${scrolled?'rgba(23,23,20,0.10)':'transparent'};transition:height .4s ease,background .4s ease,border-color .4s ease`,
+      deskNavStyle: mobile?'display:none':'display:flex;align-items:center;gap:clamp(20px,2.4vw,42px)',
+      burgerStyle: mobile?'display:flex;flex-direction:column;gap:7px;background:none;border:none;cursor:pointer;padding:10px 4px':'display:none',
+      toggleMenu:this.toggleMenu,
+      closeMenu:this.closeMenu,
+      overlayHidden: this.state.menuOpen?'false':'true',
+      overlayStyle:`position:fixed;inset:0;z-index:200;background:#171714;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:0;opacity:${this.state.menuOpen?1:0};pointer-events:${this.state.menuOpen?'auto':'none'};transition:opacity .5s ease`
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>{{ metaTitle }}</title>
+<meta name="description" content="{{ metaDesc }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:56px!important;padding-bottom:56px!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden">
+  <dc-import name="Nav" active="journal" hint-size="100%,88px"></dc-import>
+
+  <article>
+    <header style="max-width:1000px;margin:0 auto;padding:clamp(140px,20vh,220px) clamp(20px,5vw,64px) clamp(40px,5vw,64px);text-align:center">
+      <a data-reveal="" href="journal.dc.html" style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.24em;color:#8b857a;text-decoration:none;display:inline-block;margin-bottom:34px">← NÉRA JOURNAL</a>
+      <h1 data-reveal="" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,6vw,86px);line-height:1.05;letter-spacing:-0.01em;margin:0">{{ title }}</h1>
+      <p data-reveal="" style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.2em;color:#8b857a;margin:30px 0 0">{{ meta }}</p>
+    </header>
+
+    <div data-reveal="" style="max-width:1400px;margin:0 auto;padding:0 clamp(20px,5vw,64px)">
+      <div style="aspect-ratio:16/9;background:#E7DFD2;overflow:hidden"><dc-import name="Img" src="{{ heroImg }}" alt="{{ title }}" pos="{{ heroPos }}" loading="eager" hint-size="100%,100%"></dc-import></div>
+    </div>
+
+    <div style="max-width:680px;margin:0 auto;padding:clamp(60px,8vw,110px) clamp(20px,5vw,32px) clamp(90px,13vw,180px)">
+      <p data-reveal="" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(22px,2.6vw,32px);line-height:1.4;color:#3f3b33;margin:0 0 clamp(36px,5vw,56px)">{{ lead }}</p>
+      <sc-for list="{{ paras }}" as="p" hint-placeholder-count="5">
+        <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(16px,1.3vw,18px);line-height:1.9;color:#171714;margin:0 0 28px;text-wrap:pretty">{{ p }}</p>
+      </sc-for>
+      <blockquote style="margin:clamp(48px,6vw,72px) 0;padding:0;border-left:1px solid rgba(23,23,20,0.4);padding-left:28px">
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,3.4vw,44px);line-height:1.2;margin:0">{{ quote }}</p>
+      </blockquote>
+      <sc-for list="{{ paras2 }}" as="p" hint-placeholder-count="2">
+        <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(16px,1.3vw,18px);line-height:1.9;color:#171714;margin:0 0 28px;text-wrap:pretty">{{ p }}</p>
+      </sc-for>
+    </div>
+  </article>
+
+  <a href="{{ nextHref }}" style="display:block;text-decoration:none;color:#171714;border-top:1px solid rgba(23,23,20,0.14);max-width:1600px;margin:0 auto;padding:clamp(60px,9vw,120px) clamp(20px,5vw,64px)">
+    <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.24em;color:#8b857a">SLEDEĆI ČLANAK</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,5vw,72px);line-height:1.05;margin:18px 0 0;max-width:20ch">{{ nextTitle }} →</h2>
+  </a>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+  }
+  ARTICLES(){
+    return {
+      'kozna-barijera':{
+        title:'Zašto je kožna barijera važnija nego što misliš',
+        meta:'BARIJERA · 4 MIN ČITANJA',
+        heroImg:'assets/hero-model.jpg',
+        desc:'Kožna barijera je prva linija odbrane tvoje kože. Šta ona radi i zašto je važno ne narušavati je.',
+        lead:'Pre nego što dodaš još jedan proizvod u rutinu, vredi razumeti šta zapravo štiti tvoju kožu.',
+        paras:[
+          'Kožna barijera je najspoljašnjiji sloj kože - tanak, ali izuzetno važan. Njena uloga je jednostavna i suštinska: da zadrži vlagu unutra, a spoljne nadražaje napolju.',
+          'Kada je barijera u ravnoteži, koža deluje mirno, glatko i hidrirano. Kada je narušena, najčešće preagresivnim čišćenjem ili prekomplikovanom rutinom, javlja se osećaj zatezanja, suvoće ili osetljivosti.',
+          'Zato u NÉRA pristupu ne krećemo od pitanja šta još možemo dodati, već šta koži zaista treba. Manje koraka često znači stabilniju, zadovoljniju kožu.',
+        ],
+        quote:'Zdrava barijera je najbolja nega - sve ostalo je nadgradnja.',
+        paras2:[
+          'Podrška barijeri ne mora biti komplikovana. Nežno čišćenje, jedan promišljen aktivni korak i krema koja zadržava hidrataciju - to je okvir na kojem gradimo NÉRA ritual.',
+          'Ako tvoja koža deluje nepredvidivo, pre nego što dodaš nešto novo, razmisli da li možeš da oduzmeš. Ponekad je najbolja nega ona koja pušta kožu da radi svoj posao.',
+        ],
+        next:'deset-proizvoda'
+      },
+      'deset-proizvoda':{
+        title:'Da li je tvojoj koži zaista potrebno deset proizvoda?',
+        meta:'RUTINA · 3 MIN ČITANJA',
+        heroImg:'assets/lineup-wide.jpg',
+        desc:'Duga rutina ne znači bolju negu. Kako da prepoznaš koje korake tvoja koža stvarno traži.',
+        lead:'Deset koraka zvuči temeljno. Ali koža retko traži količinu - traži pravu stvar u pravo vreme.',
+        paras:[
+          'Ideja da nam treba sve više proizvoda dolazi spolja, ne iz kože. Što više koraka dodaš, to je teže znati šta zapravo radi, a šta samo opterećuje.',
+          'Više aktivnih sastojaka odjednom ne znači brži rezultat. Češće znači zbunjenu kožu koja ne stigne da odgovori ni na jedan.',
+          'NÉRA ritual staje u tri koraka: očisti, tretiraj, zaštiti. Sve preko toga bira se sa razlogom, a ne po navici.',
+        ],
+        quote:'Jednostavnija rutina je lakša za praćenje - a ono što praktikuješ, to i deluje.',
+        paras2:[
+          'Ako nisi sigurna odakle da počneš, kreni od osnove i dodaj tek kada koža to jasno traži. Manje proizvoda znači i jasniji signal šta ti odgovara.',
+          'Cilj nije prazna polica, već svrha iza svakog koraka.',
+        ],
+        next:'niacinamid'
+      },
+      'niacinamid':{
+        title:'Niacinamid: šta zapravo radi?',
+        meta:'SASTOJCI · 5 MIN ČITANJA',
+        heroImg:'assets/serum-drop.jpg',
+        desc:'Jedan od najbolje ispitanih sastojaka u nezi kože. Šta niacinamid radi i zašto ga volimo.',
+        lead:'Niacinamid se pojavljuje na skoro svakoj etiketi. Evo zašto zaista zaslužuje to mesto.',
+        paras:[
+          'Niacinamid je oblik vitamina B3. Rastvorljiv je u vodi i dobro podnošljiv, što ga čini jednim od najsvestranijih aktivnih sastojaka.',
+          'Podržava prirodnu funkciju kožne barijere i pomaže koži da zadrži vlagu. Uz to doprinosi ujednačenijem tenu i mekšem izgledu kože.',
+          'U Renewal Serumu koristimo niacinamid u koncentraciji od 5% - dovoljno da bude delotvoran, a i dalje nežan prema koži.',
+        ],
+        quote:'Dobar sastojak ne mora da bude agresivan da bi radio svoj posao.',
+        paras2:[
+          'Niacinamid se lepo slaže sa hijaluronskom kiselinom i peptidima, pa dobro funkcioniše u promišljenoj, jednostavnoj formuli.',
+          'Ne očekuj dramu preko noći. Očekuj kožu koja tokom vremena deluje mirnije i uravnoteženije.',
+        ],
+        next:'jednostavnija-rutina'
+      },
+      'jednostavnija-rutina':{
+        title:'Kako napraviti jednostavniju rutinu nege',
+        meta:'RITUAL · 4 MIN ČITANJA',
+        heroImg:'assets/routine-flatlay.jpg',
+        desc:'Praktičan vodič kroz jednostavniju negu kože u tri koraka, bez suvišnog.',
+        lead:'Jednostavnija rutina nije rutina koje se odričeš - to je ona koje se zaista držiš.',
+        paras:[
+          'Počni tako što ćeš izlistati sve što trenutno koristiš. Za svaki proizvod pitaj se čemu služi. Ako nemaš jasan odgovor, verovatno ti ne treba.',
+          'Zadrži tri stvari: nežno čišćenje, jedan aktivni korak i negu koja zaključava hidrataciju. To je kostur koji radi za većinu tipova kože.',
+          'Uvedi promene polako. Jedan po jedan proizvod, da bi znala šta ti zaista odgovara.',
+        ],
+        quote:'Najbolja rutina je ona koju možeš da poštuješ i kada nemaš vremena.',
+        paras2:[
+          'Doslednost pobeđuje kompleksnost. Tri koraka svaki dan vrede više od deset koje radiš s vremena na vreme.',
+          'Kada rutina postane laka, prestaje da bude obaveza i postaje deo dana kojem se raduješ.',
+        ],
+        next:'kozna-barijera'
+      },
+    };
+  }
+  renderVals(){
+    const map=this.ARTICLES();
+    let slug='kozna-barijera';
+    try{ const q=new URLSearchParams(window.location.search).get('a'); if(q&&map[q]) slug=q; }catch(e){}
+    const a=map[slug];
+    const nx=map[a.next];
+    return {
+      metaTitle:a.title+' - NÉRA Journal',
+      metaDesc:a.desc,
+      title:a.title, meta:a.meta, heroImg:a.heroImg, heroPos:a.heroPos||'center', lead:a.lead,
+      paras:a.paras, quote:a.quote, paras2:a.paras2,
+      nextTitle:nx.title, nextHref:'clanak.dc.html?a='+a.next
+    };
+  }
+}
+</script>
+</body>
+</html>

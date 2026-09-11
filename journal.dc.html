@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Journal - NÉRA | Beleške o koži i jednostavnijoj nezi</title>
+<meta name="description" content="NÉRA Journal - editorial beleške o koži, sastojcima i jednostavnijoj nezi. Kožna barijera, niacinamid, minimalne rutine i više.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:56px!important;padding-bottom:56px!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden">
+  <dc-import name="Nav" active="journal" hint-size="100%,88px"></dc-import>
+
+  <section style="padding:clamp(150px,20vh,240px) clamp(20px,5vw,64px) clamp(48px,6vw,80px);max-width:1600px;margin:0 auto">
+    <span data-reveal style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.28em;color:#8b857a;display:block;margin-bottom:30px">NÉRA / JOURNAL</span>
+    <h1 data-reveal style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(48px,10vw,150px);line-height:0.95;letter-spacing:-0.01em;margin:0">NÉRA Journal</h1>
+  </section>
+
+  <a href="clanak.dc.html?a=kozna-barijera" data-reveal style="display:block;text-decoration:none;color:#171714;max-width:1600px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(60px,8vw,100px)">
+    <div style="position:relative;aspect-ratio:16/9;background:#E7DFD2;overflow:hidden"><dc-import name="Img" src="assets/hero-model.jpg" alt="Zašto je kožna barijera važna" loading="eager" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:28px">
+      <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a">BARIJERA · 4 MIN ČITANJA</span>
+      <span style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.2em">ČITAJ →</span>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(32px,5.5vw,84px);line-height:1.05;margin:16px 0 0;max-width:20ch">Zašto je kožna barijera važnija nego što misliš</h2>
+  </a>
+
+  <div style="max-width:1600px;margin:0 auto;padding:0 clamp(20px,5vw,64px) clamp(100px,14vw,200px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,4vw,64px);border-top:1px solid rgba(23,23,20,0.14);padding-top:clamp(48px,6vw,80px)">
+      <sc-for list="{{ articles }}" as="a" hint-placeholder-count="3">
+        <a href="{{ a.href }}" data-reveal style="text-decoration:none;color:#171714;display:block">
+          <div style="position:relative;aspect-ratio:4/3;background:#E7DFD2;overflow:hidden"><dc-import name="Img" src="{{ a.src }}" alt="{{ a.title }}" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div>
+          <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a;display:block;margin:22px 0 12px">{{ a.tag }}</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,2.6vw,36px);line-height:1.15;margin:0;max-width:24ch">{{ a.title }}</h3>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+  }
+  renderVals(){
+    return {articles:[
+      {tag:'RUTINA · 3 MIN',title:'Da li je tvojoj koži zaista potrebno deset proizvoda?',src:'assets/lineup-wide.jpg',href:'clanak.dc.html?a=deset-proizvoda'},
+      {tag:'SASTOJCI · 5 MIN',title:'Niacinamid: šta zapravo radi?',src:'assets/serum-drop.jpg',href:'clanak.dc.html?a=niacinamid'},
+      {tag:'RITUAL · 4 MIN',title:'Kako napraviti jednostavniju rutinu nege',src:'assets/routine-flatlay.jpg',href:'clanak.dc.html?a=jednostavnija-rutina'},
+    ]};
+  }
+}
+</script>
+</body>
+</html>

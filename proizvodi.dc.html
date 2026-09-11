@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Proizvodi - NÉRA | Četiri formule. Jednostavan ritual.</title>
+<meta name="description" content="Četiri NÉRA formule za jednostavan i promišljen ritual nege - Renewal Serum, Barrier Crème, Gentle Cleanser i Night Concentrate.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:56px!important;padding-bottom:56px!important}.life-desk{display:none!important}.life-mob{display:block!important}.prow-img{order:0!important}.prow-txt{order:1!important;margin-top:24px}.prow{padding:28px 0!important;gap:20px!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden">
+  <dc-import name="Nav" active="proizvodi" hint-size="100%,88px"></dc-import>
+
+  <section style="padding:clamp(120px,16vh,170px) clamp(20px,5vw,64px) clamp(48px,6vw,80px);max-width:1600px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center">
+    <span data-reveal style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.28em;color:#8b857a;display:block;margin-bottom:34px">NÉRA / PROIZVODI</span>
+    <h1 data-reveal style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,9vw,140px);line-height:0.95;letter-spacing:-0.01em;margin:0;max-width:20ch">MANJE PROIZVODA.<br>VIŠE SMISLA.</h1>
+    <p data-reveal style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(16px,1.5vw,21px);color:#3f3b33;margin:36px 0 0">Četiri formule. Jednostavan ritual.</p>
+  </section>
+
+  <div style="max-width:1600px;margin:0 auto;padding:0 clamp(20px,5vw,64px)">
+    <sc-for list="{{ rows }}" as="p" hint-placeholder-count="4">
+      <a href="{{ p.href }}" data-reveal class="prow" style="text-decoration:none;color:#171714;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,80px);align-items:center;padding:clamp(48px,7vw,96px) 0;border-top:1px solid rgba(23,23,20,0.14)">
+        <div class="prow-img" style="order:{{ p.imgOrder }};position:relative;aspect-ratio:4/5;min-height:340px;overflow:hidden;background:#E7DFD2">
+          <dc-import name="Img" src="{{ p.src }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import>
+        </div>
+        <div class="prow-txt" style="order:{{ p.txtOrder }}">
+          <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.24em;color:#8b857a">{{ p.num }}</span>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,4.4vw,64px);line-height:1;margin:14px 0 0">{{ p.name }}</h2>
+          <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(16px,1.4vw,19px);color:#3f3b33;line-height:1.6;margin:22px 0 0;max-width:42ch">{{ p.desc }}</p>
+          <span style="display:inline-flex;align-items:center;gap:10px;margin-top:34px;font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.22em;border-bottom:1px solid #171714;padding-bottom:6px">ISTRAŽI <span>→</span></span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+
+  <section style="position:relative;height:80vh;min-height:480px;overflow:hidden;margin-top:clamp(48px,7vw,96px)">
+    <div data-parallax style="position:absolute;inset:0"><div class="life-desk" style="position:absolute;inset:0"><dc-import name="Img" src="assets/hero-model.jpg" alt="NÉRA lifestyle" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div><div class="life-mob" style="position:absolute;inset:0;display:none"><dc-import name="Img" src="assets/proizvodi-life-mob.jpg" alt="NÉRA lifestyle" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div></div>
+    <div style="position:absolute;inset:0;background:rgba(23,23,20,0.20)"></div>
+    <div style="position:absolute;inset:0;display:flex;align-items:flex-end;padding:clamp(32px,5vw,72px)">
+      <p data-reveal style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;color:#F4F0E8;font-size:clamp(26px,4vw,58px);line-height:1.1;margin:0;max-width:20ch">Prava nega ne zahteva punu policu.</p>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+    this._px=()=>{const y=window.innerHeight;document.querySelectorAll('[data-parallax-off]').forEach(p=>{const r=p.getBoundingClientRect();p.style.transform='translateY('+((r.top+r.height/2-y/2)*-0.06)+'px) scale(1.08)';});};
+    window.addEventListener('scroll',this._px,{passive:true});this._px();
+  }
+  componentWillUnmount(){if(this._px)window.removeEventListener('scroll',this._px);}
+  renderVals(){
+    const data=[
+      {num:'01',name:'Renewal Serum',desc:'Serum za obnovu kože sa niacinamidom, peptidnim kompleksom i hijaluronskom kiselinom. Podrška barijeri, čvrstina i hidratacija u jednoj formuli.',src:'assets/serum.jpg',href:'proizvod.dc.html?p=renewal-serum'},
+      {num:'02',name:'Barrier Crème',desc:'Krema koja jača i štiti kožnu barijeru. Bogata, ali lagana tekstura koja zaključava hidrataciju bez osećaja težine.',src:'assets/p-barrier.jpg',href:'proizvod.dc.html?p=barrier-creme'},
+      {num:'03',name:'Gentle Cleanser',desc:'Nežni gel za čišćenje koji uklanja nečistoće bez narušavanja prirodne ravnoteže kože. Prvi korak svakog rituala.',src:'assets/p-cleanser.jpg',href:'proizvod.dc.html?p=gentle-cleanser'},
+      {num:'04',name:'Night Concentrate',desc:'Noćni koncentrat koji radi dok spavaš. Intenzivna obnova i podrška koži tokom regeneracije.',src:'assets/p-night.jpg',href:'proizvod.dc.html?p=night-concentrate'},
+    ];
+    const rows=data.map((p,i)=>({...p, imgOrder:i%2===0?0:2, txtOrder:1}));
+    return {rows};
+  }
+}
+</script>
+</body>
+</html>

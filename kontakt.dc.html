@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Kontakt - NÉRA | Razgovarajmo</title>
+<meta name="description" content="Stupi u kontakt sa NÉRA. Pošalji nam poruku ili nas prati na Instagramu i Pinterestu. hello@neraskin.rs">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:56px!important;padding-bottom:56px!important}}input,textarea{font-family:'Manrope',sans-serif}input::placeholder,textarea::placeholder{color:#a8a294}input:focus,textarea:focus{outline:none;border-color:#171714 !important}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh">
+  <dc-import name="Nav" active="kontakt" hint-size="100%,88px"></dc-import>
+
+  <section style="flex:1;max-width:1600px;margin:0 auto;width:100%;padding:clamp(150px,20vh,240px) clamp(20px,5vw,64px) clamp(90px,12vw,160px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(48px,7vw,120px);align-items:start">
+      <div>
+        <span data-reveal style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.28em;color:#8b857a;display:block;margin-bottom:30px">NÉRA / KONTAKT</span>
+        <h1 data-reveal style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(52px,9vw,140px);line-height:0.95;letter-spacing:-0.01em;margin:0">Razgovarajmo.</h1>
+        <div data-reveal style="margin-top:clamp(48px,6vw,80px);display:flex;flex-direction:column;gap:26px">
+          <a href="mailto:hello@neraskin.rs" style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,38px);text-decoration:none;color:#171714;border-bottom:1px solid rgba(23,23,20,0.25);padding-bottom:8px;align-self:flex-start">hello@neraskin.rs</a>
+          <div style="display:flex;gap:28px;margin-top:8px">
+            <a href="https://instagram.com" style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.22em;text-decoration:none;color:#171714">INSTAGRAM</a>
+            <a href="https://pinterest.com" style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.22em;text-decoration:none;color:#171714">PINTEREST</a>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="border-top:1px solid rgba(23,23,20,0.2);padding-top:40px">
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(26px,3vw,40px);line-height:1.3;margin:0">Hvala. Tvoja poruka je poslata.</p>
+            <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:15px;color:#5c564a;margin:18px 0 0">Javićemo ti se na email u najkraćem roku.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:0">
+            <label style="display:block;border-top:1px solid rgba(23,23,20,0.2);padding:26px 0 12px">
+              <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a;display:block;margin-bottom:14px">IME</span>
+              <input type="text" name="ime" required placeholder="Tvoje ime" style="width:100%;box-sizing:border-box;background:transparent;border:none;border-bottom:1px solid rgba(23,23,20,0.25);padding:8px 0;font-size:18px;color:#171714">
+            </label>
+            <label style="display:block;padding:26px 0 12px">
+              <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a;display:block;margin-bottom:14px">EMAIL</span>
+              <input type="email" name="email" required placeholder="tvoj@email.com" style="width:100%;box-sizing:border-box;background:transparent;border:none;border-bottom:1px solid rgba(23,23,20,0.25);padding:8px 0;font-size:18px;color:#171714">
+            </label>
+            <label style="display:block;padding:26px 0 12px">
+              <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.22em;color:#8b857a;display:block;margin-bottom:14px">PORUKA</span>
+              <textarea name="poruka" required rows="4" placeholder="Kako možemo da pomognemo?" style="width:100%;box-sizing:border-box;background:transparent;border:none;border-bottom:1px solid rgba(23,23,20,0.25);padding:8px 0;font-size:18px;color:#171714;resize:vertical"></textarea>
+            </label>
+            <button type="submit" style="align-self:flex-start;margin-top:36px;font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.22em;color:#F4F0E8;background:#171714;border:none;cursor:pointer;padding:18px 34px;display:inline-flex;align-items:center;gap:12px;transition:opacity .3s ease" style-hover="opacity:0.85">POŠALJI PORUKU <span style="font-size:14px">→</span></button>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state={sent:false};
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+  }
+  onSubmit=(e)=>{ e.preventDefault(); this.setState({sent:true}); }
+  renderVals(){ return {sent:this.state.sent, notSent:!this.state.sent, onSubmit:this.onSubmit}; }
+}
+</script>
+</body>
+</html>

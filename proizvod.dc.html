@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>{{ metaTitle }}</title>
+<meta name="description" content="NÉRA proizvodi - pažljivo odabrane formule za jednostavan ritual nege. Ciljani sastojci, promišljene formulacije, bez suvišnog.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>html{scroll-behavior:smooth}body{margin:0;background:#F4F0E8;color:#171714;-webkit-font-smoothing:antialiased}a{color:#171714}a:hover{color:#5c564a}@media(max-width:768px){section{padding-top:18px!important;padding-bottom:18px!important}#formula,section[id="formula"]{padding-top:18px!important;padding-bottom:18px!important}.prod-hero{min-height:0!important}.prod-hero-txt{padding:68px 20px 20px!important}.prod-tex{height:38vh!important;min-height:260px!important}.prod-actives{padding-top:40px!important}.prod-hero-img{min-height:0!important;aspect-ratio:4/5}.prod-tex-note{left:0!important;right:0!important;top:auto!important;bottom:0!important;transform:none;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0 0 72px!important}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+</helmet>
+<div style="background:#F4F0E8;overflow-x:hidden">
+  <dc-import name="Nav" active="proizvodi" hint-size="100%,88px"></dc-import>
+
+  <section class="prod-hero" style="min-height:100vh;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:stretch">
+    <div class="prod-hero-txt" style="display:flex;flex-direction:column;justify-content:center;padding:clamp(120px,16vh,180px) clamp(20px,5vw,72px) clamp(48px,6vw,72px)">
+      <span data-reveal="" style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.28em;color:#8b857a;margin-bottom:28px">{{ eyebrow }}</span>
+      <h1 data-reveal="" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(44px,6vw,92px);line-height:0.98;margin:0;letter-spacing:-0.01em">{{ name }}</h1>
+      <p data-reveal="" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,2.2vw,32px);color:#3f3b33;line-height:1.3;margin:26px 0 0;max-width:26ch">{{ subtitle }}</p>
+      <a data-reveal="" href="#formula" style="display:inline-flex;align-items:center;gap:12px;margin-top:46px;font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.22em;color:#171714;text-decoration:none;border-bottom:1px solid #171714;padding-bottom:8px;align-self:flex-start">OTKRIJ FORMULU <span>↓</span></a>
+    </div>
+    <div class="prod-hero-img" style="position:relative;min-height:60vh;background:#E7DFD2">
+      <dc-import name="Img" src="{{ heroImg }}" alt="{{ name }}" loading="eager" hint-size="100%,100%"></dc-import>
+    </div>
+  </section>
+
+  <section id="formula" style="max-width:1600px;margin:0 auto;padding:clamp(90px,13vw,180px) clamp(20px,5vw,64px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,90px)">
+      <h2 data-reveal="" style="font-family:'Manrope',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.24em;margin:0">ŠTA RADI</h2>
+      <p data-reveal="" style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,3.4vw,48px);line-height:1.25;margin:0;max-width:24ch;grid-column:span 2">{{ whatItDoes }}</p>
+    </div>
+  </section>
+
+  <section class="prod-actives" style="background:#171714;color:#F4F0E8;padding:clamp(80px,12vw,160px) clamp(20px,5vw,64px)">
+    <div style="max-width:1600px;margin:0 auto">
+      <h2 data-reveal="" style="font-family:'Manrope',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.24em;color:#9a9484;margin:0 0 clamp(40px,5vw,64px)">KLJUČNI SASTOJCI</h2>
+      <sc-for list="{{ actives }}" as="a" hint-placeholder-count="3">
+        <div data-reveal="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;border-top:1px solid rgba(244,240,232,0.16);padding:clamp(28px,4vw,48px) 0">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,4vw,56px);margin:0;line-height:1">{{ a.title }}</h3>
+          <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(15px,1.3vw,18px);color:#c9c2b3;line-height:1.6;margin:0;grid-column:span 2;max-width:52ch">{{ a.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1600px;margin:0 auto;padding:clamp(90px,13vw,180px) clamp(20px,5vw,64px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,90px)">
+      <h2 data-reveal="" style="font-family:'Manrope',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.24em;margin:0">KAKO SE KORISTI</h2>
+      <p data-reveal="" style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,3vw,42px);line-height:1.3;margin:0;grid-column:span 2;max-width:28ch">{{ howToUse }}</p>
+    </div>
+  </section>
+
+  <section class="prod-tex" style="position:relative;height:85vh;min-height:480px;overflow:hidden">
+    <div style="position:absolute;inset:0"><dc-import name="Img" src="{{ textureImg }}" alt="Tekstura - {{ name }}" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></dc-import></div>
+    <div class="prod-tex-note" style="position:absolute;left:0;bottom:0;padding:clamp(28px,5vw,64px)">
+      <span data-reveal="" style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.24em;color:#F4F0E8;background:rgba(23,23,20,0.6);padding:8px 16px">{{ textureNote }}</span>
+    </div>
+  </section>
+
+  <section style="max-width:1600px;margin:0 auto;padding:clamp(90px,13vw,180px) clamp(20px,5vw,64px)">
+    <h2 data-reveal="" style="font-family:'Manrope',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.24em;margin:0 0 clamp(40px,5vw,64px)">RITUAL</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,3vw,48px)">
+      <sc-for list="{{ ritual }}" as="r" hint-placeholder-count="3">
+        <div data-reveal="" style="border-top:1px solid rgba(23,23,20,0.18);padding-top:24px;opacity:{{ r.op }}">
+          <span style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.2em;color:#8b857a">{{ r.num }}</span>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(28px,3.4vw,48px);margin:14px 0 6px;line-height:1">{{ r.title }}</h3>
+          <p style="font-family:'Manrope',sans-serif;font-weight:300;font-size:14px;color:#5c564a;margin:0">{{ r.product }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <a href="{{ nextHref }}" style="display:block;text-decoration:none;color:#171714;border-top:1px solid rgba(23,23,20,0.14);padding:clamp(60px,9vw,120px) clamp(20px,5vw,64px);max-width:1600px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px">
+      <span style="font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:0.24em;color:#8b857a">SLEDEĆI PROIZVOD</span>
+      <span style="font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:0.2em">SVI PROIZVODI →</span>
+    </div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,7vw,110px);line-height:1;margin:20px 0 0">{{ nextName }} →</h2>
+  </a>
+
+  <dc-import name="Footer" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';if(!reduce)el.style.transition='opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1)';});
+    if(reduce){els.forEach(el=>{el.style.opacity='1';el.style.transform='none';});return;}
+    const reveal=()=>{const vh=window.innerHeight;els.forEach(el=>{if(el.__r)return;const t=el.getBoundingClientRect().top;if(t<vh*0.9){el.__r=true;el.style.opacity='1';el.style.transform='none';}});};
+    window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+    reveal();requestAnimationFrame(reveal);setTimeout(reveal,250);
+    setTimeout(()=>els.forEach(el=>{el.style.opacity='1';el.style.transform='none';}),2500);
+  }
+  PRODUCTS(){
+    return {
+      'renewal-serum':{
+        num:'01',name:'Renewal Serum',
+        subtitle:'Koncentrat za hidrataciju, obnovu i podršku kožnoj barijeri.',
+        heroImg:'assets/serum.jpg',textureImg:'assets/texture.jpg',
+        textureNote:'TEKSTURA - lagani, brzo upijajući koncentrat',
+        whatItDoes:'Renewal Serum objedinjuje tri aktivna sastojka u jednoj laganoj formuli - obnavlja, jača barijeru i vraća koži hidrataciju, bez opterećenja rutine.',
+        howToUse:'Nakon čišćenja, nanesi nekoliko kapi na suvu kožu i nežno utapkaj. U ritualu dolazi kao drugi korak, TRETIRAJ, pre kreme za zaštitu barijere.',
+        actives:[
+          {title:'Niacinamid 5%',desc:'Podržava prirodnu kožnu barijeru i pomaže u ujednačavanju tena.'},
+          {title:'Peptidni kompleks',desc:'Doprinosi osećaju čvrstine i elastičnosti kože.'},
+          {title:'Hijaluronska kiselina',desc:'Vezuje vlagu i pruža intenzivnu, dugotrajnu hidrataciju.'},
+        ],
+        ritualActive:'TRETIRAJ',next:'barrier-creme'
+      },
+      'barrier-creme':{
+        num:'02',name:'Barrier Crème',
+        subtitle:'Krema koja jača i štiti kožnu barijeru tokom celog dana.',
+        heroImg:'assets/p-barrier.jpg',textureImg:'assets/texture.jpg',
+        textureNote:'TEKSTURA - bogata, ali lagana krema',
+        whatItDoes:'Barrier Crème hrani i štiti kožnu barijeru. Bogata tekstura zaključava hidrataciju bez osećaja težine, pa koža ostaje mirna i zaštićena.',
+        howToUse:'Nanesi kao poslednji korak nege, ujutru i uveče, na očišćenu kožu preko seruma. U ritualu je treći korak, ZAŠTITI.',
+        actives:[
+          {title:'Ceramidi',desc:'Prirodni deo kožne barijere koji pomaže da koža zadrži vlagu.'},
+          {title:'Peptidni kompleks',desc:'Doprinosi osećaju čvrstine i elastičnosti kože.'},
+          {title:'Hijaluronska kiselina',desc:'Vezuje vlagu i drži kožu hidriranom tokom dana.'},
+        ],
+        ritualActive:'ZAŠTITI',next:'gentle-cleanser'
+      },
+      'gentle-cleanser':{
+        num:'03',name:'Gentle Cleanser',
+        subtitle:'Nežni gel koji čisti bez narušavanja prirodne ravnoteže kože.',
+        heroImg:'assets/p-cleanser.jpg',textureImg:'assets/texture.jpg',
+        textureNote:'TEKSTURA - nežni gel koji se lako ispira',
+        whatItDoes:'Gentle Cleanser uklanja nečistoće, višak sebuma i ostatke nege bez osećaja zatezanja. Priprema kožu za sledeće korake, a ne razgrađuje barijeru.',
+        howToUse:'Nanesi na vlažnu kožu, nežno umasiraj i isperi mlakom vodom. Prvi korak rituala, OČISTI, ujutru i uveče.',
+        actives:[
+          {title:'Blagi surfaktanti',desc:'Čiste kožu nežno, bez agresivnog isušivanja.'},
+          {title:'Glicerin',desc:'Zadržava vlagu u koži i tokom čišćenja.'},
+          {title:'Bez dodatih mirisa',desc:'Formulisan sa fokusom na ono što je koži potrebno.'},
+        ],
+        ritualActive:'OČISTI',next:'night-concentrate'
+      },
+      'night-concentrate':{
+        num:'04',name:'Night Concentrate',
+        subtitle:'Noćni koncentrat koji podržava kožu dok se regeneriše.',
+        heroImg:'assets/p-night.jpg',textureImg:'assets/texture.jpg',
+        textureNote:'TEKSTURA - koncentrovana noćna formula',
+        whatItDoes:'Night Concentrate radi dok spavaš. Podržava prirodnu regeneraciju kože i ujutru je ostavlja odmornijom i hidriranijom.',
+        howToUse:'Nanesi uveče na očišćenu kožu, umesto ili pre kreme, nekoliko puta nedeljno ili svako veče. Deo je koraka TRETIRAJ.',
+        actives:[
+          {title:'Hijaluronska kiselina',desc:'Intenzivna hidratacija tokom noćne regeneracije.'},
+          {title:'Peptidni kompleks',desc:'Doprinosi osećaju čvrstine i elastičnosti kože.'},
+          {title:'Bez dodatih mirisa',desc:'Fokus na ono što je koži potrebno tokom noći.'},
+        ],
+        ritualActive:'TRETIRAJ',next:'renewal-serum'
+      },
+    };
+  }
+  renderVals(){
+    const map=this.PRODUCTS();
+    let slug='renewal-serum';
+    try{ const q=new URLSearchParams(window.location.search).get('p'); if(q&&map[q]) slug=q; }catch(e){}
+    const p=map[slug];
+    const nx=map[p.next];
+    const ritual=[
+      {num:'01',title:'OČISTI',product:'Gentle Cleanser'},
+      {num:'02',title:'TRETIRAJ',product:'Renewal Serum / Night Concentrate'},
+      {num:'03',title:'ZAŠTITI',product:'Barrier Crème'},
+    ].map(r=>({...r,op:r.title===p.ritualActive?1:0.5}));
+    return {
+      metaTitle:p.name+' - NÉRA',
+      eyebrow:'NÉRA / '+p.name.toUpperCase(),
+      name:p.name, subtitle:p.subtitle,
+      heroImg:p.heroImg, textureImg:p.textureImg, textureNote:p.textureNote,
+      whatItDoes:p.whatItDoes, howToUse:p.howToUse, actives:p.actives,
+      ritual,
+      nextName:nx.name, nextHref:'proizvod.dc.html?p='+p.next
+    };
+  }
+}
+</script>
+</body>
+</html>
